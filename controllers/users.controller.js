@@ -1,10 +1,11 @@
 const mapValidationMessages = require('../utils/mapValidationMessages');
 const { User } = require('../models/index');
+const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
 const { hashSync,compareSync } = require("bcrypt");
 const saltRounds = 10;
 
-async function createUser(req, res, next) {
+async function create(req, res, next) {
     try {
   
       const result = validationResult(req); 
@@ -36,12 +37,12 @@ async function createUser(req, res, next) {
       }
     } catch(e){
       res.status(500).json({
-        success:false,errors:[e.message]
+        success:false,error:e.message
       });
     }
 }
 
-async function authenticateUser(req, res) {
+async function authenticate(req, res) {
     try {
       const data = req.body;
       const user = await User.findOne({ where: { email: data.email} });
@@ -67,14 +68,12 @@ async function authenticateUser(req, res) {
       }
     } catch(e){
       res.status(500).json({
-        success:false,errors:[{
-          message:e.message
-        }]
+        success:false,error: e.message
       });
     }
   }
 
 module.exports = {
-    createUser,
-    authenticateUser
+    create,
+    authenticate
 }
