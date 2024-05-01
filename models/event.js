@@ -28,13 +28,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       notNull: true, 
       isNumeric: true,
-      len: [0,1000], 
     },
     
     description: {
       type: DataTypes.STRING,
-      len: [8,500],
-
     },
 
     category: {
