@@ -13,25 +13,15 @@ module.exports = {
       user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: {
-          model: {
-            tableName: 'users',
-            schema: 'schema',
-          },
-          key: 'id',
-        },
       },
 
       event_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: {
-          model: {
-            tableName: 'events',
-            schema: 'schema',
-          },
-          key: 'id',
-        },
+      },
+      
+      attendees_count: {
+        type: Sequelize.INTEGER,
       },
 
       createdAt: {

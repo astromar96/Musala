@@ -1,7 +1,5 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Event extends Model {
     /**
@@ -14,39 +12,42 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
 
-//   - name (limited to 100 characters);
-// - date (in a valid date format);
+  //   - name (limited to 100 characters);
+  // - date (in a valid date format);
 
-  Event.init({
-    name:  {
-      type: DataTypes.STRING,
-      len: [0,100],
-      notNull: true,    
-    },
+  Event.init(
+    {
+      name: {
+        type: DataTypes.STRING,
+        len: [0, 100],
+        notNull: true,
+      },
 
-    attendees_count: {
-      type: DataTypes.INTEGER,
-      notNull: true, 
-      isNumeric: true,
-    },
-    
-    description: {
-      type: DataTypes.STRING,
-    },
+      attendees_count: {
+        type: DataTypes.INTEGER,
+        notNull: true,
+        isNumeric: true,
+      },
 
-    category: {
-      type: DataTypes.ENUM,
-      values: ['Concert', 'Conference', 'Game'],
+      description: {
+        type: DataTypes.STRING,
+      },
+
+      category: {
+        type: DataTypes.ENUM,
+        values: ['Concert', 'Conference', 'Game'],
+      },
+
+      date: {
+        type: DataTypes.DATE,
+        isDate: true,
+        notNull: true,
+      },
     },
-   
-    date:{
-      type: DataTypes.DATE,
-      isDate: true,
-      notNull: true,
+    {
+      sequelize,
+      modelName: 'Event',
     }
-  }, {
-    sequelize,
-    modelName: 'Event',
-  });
+  );
   return Event;
 };
